@@ -1,0 +1,56 @@
+//Sorting Program
+//Struktur Data dan Algoritma
+
+#include <iostream>
+using namespace std;
+
+typedef int Array;
+
+int Partition(Array A[], int p, int r){
+	int x = A[p];
+	int i = p;
+	int j = r;
+	
+	do{
+		while(A[j] > x){ j--; }
+		while(A[i] < x){ i++; }
+		
+		if(i < j){
+			swap(A[i], A[j]);
+			j--;
+			i++;
+		}
+		else{
+			return j;
+		}
+	}
+	while(i >= j);
+	return j;
+}
+
+void Quicksort(Array A[], int p, int r){
+	if(p < r){
+		int q = Partition(A, p, r);
+		Quicksort(A, p, q);
+		Quicksort(A, q+1, r);
+	}
+}
+
+int main(){
+	Array A1[] = {0, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+	int n = sizeof(A1) / sizeof(A1[0]);
+	
+	cout << n << endl;
+	
+	for(int i = 0; i < n; i++){
+		cout <<  A1[i] << " ";
+	}
+	
+	cout << endl;
+	Quicksort(A1, 0, 9);
+	cout << endl;
+	
+	for(int i = 0; i < n; i++){
+		cout << A1[i] << " ";
+	}
+}
